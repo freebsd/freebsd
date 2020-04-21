@@ -4,11 +4,15 @@
 
 .include <src.opts.mk>
 CFLAGS+=-I${SRCTOP}/sys
-CFLAGS+=-rdynamic -DWITHOUT_CAPSICUM
+CFLAGS+=-g -O0
+CFLAGS+=-DWITHOUT_CAPSICUM
 .PATH:  ${SRCTOP}/sys/cam/ctl
 
-PROG=	bhyve
-PACKAGE=	bhyve
+BHYVE_RBD=yes
+
+PROG=	bhyve-rbd
+# LINKS=  ${BINDIR}/bhyve ${BINDIR}/bhyve-rbd
+PACKAGE=	bhyve-rbd
 
 MAN=	bhyve.8
 
@@ -69,10 +73,16 @@ SRCS=	\
 	usb_mouse.c		\
 	virtio.c		\
 	vga.c			\
-	vmgenc.c		\
 	xmsr.c			\
 	spinup_ap.c		\
 	iov.c
+
+.if defined(BHYVE_RBD)
+LOCALBASE?=	/usr/local
+CFLAGS+=	-I${LOCALBASE}/include
+LDFLAGS+=	-L${LOCALBASE}/lib -lrados -lrbd
+SRCS+=	block_rbd.c
+.endif
 
 .PATH:  ${BHYVE_SYSDIR}/sys/amd64/vmm
 SRCS+=	vmm_instruction_emul.c
