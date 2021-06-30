@@ -37,13 +37,13 @@ wcsncasecmp(const wchar_t *s1, const wchar_t *s2, size_t n)
 
 	if (n == 0)
 		return (0);
-	for (; *s1; s1++, s2++) {
+	for (;; s1++, s2++) {
 		c1 = towlower(*s1);
 		c2 = towlower(*s2);
 		if (c1 != c2)
-			return ((int)c1 - c2);
-		if (--n == 0)
+			return ((unsigned int)c1 > (unsigned int)c2 ? 1 : -1);
+		if (c1 == L'\0' || --n == 0)
 			return (0);
 	}
-	return (-*s2);
+	/* NOTREACHED */
 }
