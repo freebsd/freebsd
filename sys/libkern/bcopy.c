@@ -58,7 +58,7 @@ __FBSDID("$FreeBSD$");
  * sizeof(word) MUST BE A POWER OF TWO
  * SO THAT wmask BELOW IS ALL ONES
  */
-typedef	unsigned long	word;		/* "word" used for optimal copy speed */
+typedef	u_long	word;		/* "word" used for optimal copy speed */
 
 #define	wsize	sizeof(word)
 #define wmask	(wsize - 1)
@@ -71,8 +71,8 @@ typedef	unsigned long	word;		/* "word" used for optimal copy speed */
 void *
 memmove(void *dst0, const void *src0, size_t length)
 {
-	unsigned char		*dst = (unsigned char *)dst0;
-	const unsigned char	*src = (const unsigned char*)src0;
+	u_char		*dst = (u_char *)dst0;
+	const u_char	*src = (const u_char*)src0;
 	size_t		t;
 
 	if (length == 0 || dst == src) {	/* nothing to do */
