@@ -126,7 +126,6 @@ readether(struct iodesc *d, void **pkt, void **payload, time_t tleft,
 	return (n);
 }
 
-#ifdef ETHER_DEBUG
 /*
  * Convert Ethernet address to printable (loggable) representation.
  */
@@ -136,13 +135,13 @@ ether_sprintf(u_char *ap)
 {
 	size_t i;
 	static char etherbuf[18];
+	char *cp = etherbuf;
 
-	for (i = 0; i < 18;) {
-		etherbuf[i++] = digits[*ap >> 4];
-		etherbuf[i++] = digits[*ap++ & 0xf];
-		etherbuf[i++] = ':';
+	for (i = 0; i < 6; ++i) {
+		*cp++ = digits[*ap >> 4];
+		*cp++ = digits[*ap++ & 0xf];
+		*cp++ = ':';
 	}
 	etherbuf[17] = '\0';
 	return (etherbuf);
 }
-#endif
