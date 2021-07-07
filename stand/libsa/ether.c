@@ -126,6 +126,7 @@ readether(struct iodesc *d, void **pkt, void **payload, time_t tleft,
 	return (n);
 }
 
+#ifdef ETHER_DEBUG
 /*
  * Convert Ethernet address to printable (loggable) representation.
  */
@@ -144,3 +145,4 @@ ether_sprintf(u_char *ap)
 	etherbuf[17] = '\0';
 	return (etherbuf);
 }
+#endif
