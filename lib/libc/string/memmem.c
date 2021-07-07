@@ -38,8 +38,8 @@ __FBSDID("$FreeBSD$");
 void *
 memmem(const void *l, size_t l_len, const void *s, size_t s_len)
 {
-	register const unsigned char *cur, *last;
-	const unsigned char *cl = (const unsigned char *)l;
+	register const u_char *cur, *last;
+	const u_char *cl = (const u_char *)l;
 	const unsigned char *cs = (const unsigned char *)s;
 
 	/* empty "s" matches the beginning of "l" */
