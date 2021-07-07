@@ -40,7 +40,7 @@ memmem(const void *l, size_t l_len, const void *s, size_t s_len)
 {
 	register const u_char *cur, *last;
 	const u_char *cl = (const u_char *)l;
-	const unsigned char *cs = (const unsigned char *)s;
+	const u_char *cs = (const u_char *)s;
 
 	/* empty "s" matches the beginning of "l" */
 	if (s_len == 0)
