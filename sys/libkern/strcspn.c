@@ -41,7 +41,7 @@ strcspn(const char * __restrict s, const char * __restrict charset)
 {
 	const char *s1;
 
-	if(*s == '\0')
+	if (*s == '\0')
 		return (0);
 
 	u_long tbl[(UCHAR_MAX + 1) / LONG_BIT] = {1}; // Rest of array is zeroes
