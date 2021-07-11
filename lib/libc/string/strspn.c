@@ -47,15 +47,11 @@ strspn(const char *s, const char *charset)
 	u_long tbl[(UCHAR_MAX + 1) / LONG_BIT] = {0};
 
 	for (; *charset != '\0'; charset++) {
-		idx = IDX(*charset);
-		bit = BIT(*charset);
-		tbl[idx] |= bit;
+		tbl[IDX(*charset)] |= BIT(*charset);
 	}
 
 	for (s1 = s; ; s1++) {
-		idx = IDX(*s1);
-		bit = BIT(*s1);
-		if ((tbl[idx] & bit) == 0)
+		if ((tbl[IDX(*s1)] & BIT(*s1)) == 0)
 			break;
 	}
 	return (s1 - s);
